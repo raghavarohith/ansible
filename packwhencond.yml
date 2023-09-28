@@ -1,0 +1,32 @@
+---
+- name: packages playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  vars:
+    env_name: dev  # You had 'dev,build' which is not a valid YAML value. I assume you meant 'dev'.
+  tasks:
+    - name: installing httpd packages (for dev and build)
+      yum:
+        name: httpd
+        state: latest
+      when: env_name in ['dev', 'build']
+
+    - name: installing nginx packages
+      yum:
+        name: nginx
+        state: latest
+      when: env_name == 'prod'
+
+    - name: installing maven packages (for build)
+      yum:
+        name: maven
+        state: latest
+      when: env_name == 'build'
+
+    - name: installing apache packages
+      yum:
+        name: apache
+        state: latest
+      when: env_name == 'staging'
+
