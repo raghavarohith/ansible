@@ -1,3 +1,4 @@
+ you want to create multiple user accounts on a remote server using Ansible. You can use a loop to iterate over a list of user names and create the accounts.
 ---
 - name: User Account Playbook
   hosts: webserver
