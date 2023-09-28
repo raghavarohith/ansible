@@ -1,0 +1,21 @@
+
+
+
+---
+- name: new playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Create the 'rocky' user
+      user:
+        name: rocky
+        state: present
+
+    - name: creating new user
+      file:
+        path: /etc/rocky.conf
+        owner: rocky
+        group: rocky
+        mode: '0644'
+

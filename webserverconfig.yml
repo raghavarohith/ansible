@@ -1,0 +1,29 @@
+---
+- name: webserverconfiguration
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: update package cache
+      apt:
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: install apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: install maven
+      apt:
+        name: maven
+        state: present
+
+- name: Database server configuration
+  hosts: dbservers
+  become: yes
+  tasks:
+    - name: install postgresql
+      apt:
+        name: postgresql
+        state: present
+

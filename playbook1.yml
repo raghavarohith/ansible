@@ -1,0 +1,16 @@
+
+
+
+---
+- name: test playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: create the directory using playbook
+      file:
+        path: /etc/raghavarohith/test1
+        state: touch
+        owner: root
+        group: test
+        mode: 600
+

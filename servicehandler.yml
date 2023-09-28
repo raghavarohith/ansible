@@ -1,0 +1,19 @@
+---
+- name: service playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install or update httpd package
+      yum:
+        name: httpd
+        state: latest
+      notify: Start httpd service
+
+  handlers:
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started
+
+

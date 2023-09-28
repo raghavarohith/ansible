@@ -1,0 +1,11 @@
+---
+- name: test playbook
+  hosts: webserver
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: copy a file using playbook
+      copy:
+        src: /root/ansible/file1
+        dest: /etc/raghavarohith/file1
+

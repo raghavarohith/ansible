@@ -1,0 +1,15 @@
+
+
+
+---
+- name: test playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install or update httpd package
+      yum:
+        name: httpd
+        state: latest
+      notify: Start httpd service  # This triggers the handler
+

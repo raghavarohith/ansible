@@ -1,0 +1,25 @@
+
+
+
+
+
+
+
+---
+- name: Create a user module
+  hosts: webserver
+  tasks:
+    - name: Create 'raghava' group
+      group:
+        name: raghava
+        state: present
+
+    - name: Create user 'raghava' and assign to the 'raghava' group
+      user:
+        name: raghava
+        uid: 2310623
+        group: raghava
+        state: present
+
+
+

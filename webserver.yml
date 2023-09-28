@@ -1,0 +1,47 @@
+
+
+
+---
+- name: test_playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+
+  vars:
+    src_dir1:
+      - /root/ansible/file1
+      - /root/ansible/file2
+      - /root/ansible/file3
+      - /root/ansible/file4
+      - /root/ansible/file5
+    dest_dir1: /etc/rohith
+
+  tasks:
+    - name: create files using playbook
+      copy:
+        src: "{{ item }}"
+        dest: "{{ dest_dir1 }}"
+      loop: "{{ src_dir1 }}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+

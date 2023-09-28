@@ -1,0 +1,14 @@
+
+
+
+---
+- name: test playbook
+  hosts: webserver  # Ensure the host group name is correct and matches your inventory
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install or update httpd package
+      yum:
+        name: httpd
+        state: latest
+
