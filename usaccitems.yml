@@ -1,0 +1,18 @@
+---
+- name: User Account Playbook
+  hosts: webserver
+  become: yes
+
+  vars:
+    users_to_create:
+      - alice
+      - bob
+      - charlie
+
+  tasks:
+    - name: Create User Accounts
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ users_to_create }}"
+
