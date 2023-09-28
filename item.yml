@@ -1,0 +1,22 @@
+---
+- name: test playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  vars:
+    src_dir1: 
+      - /root/batch5/file1
+      - /root/batch5/file2
+      - /root/batch5/file3
+      - /root/batch5/file4
+      - /root/batch5/file5
+
+    dest_dir1: /etc/arjun
+   
+  tasks:
+    - name: create the file using playbook
+      copy:
+        src: "{{ item }}"
+        dest: "{{ dest_dir1 }}"
+      loop: "{{ src_dir1 }}"
+

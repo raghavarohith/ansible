@@ -3,8 +3,11 @@
   hosts: webserver
   gather_facts: true
   become: true
+  vars:
+    src_dir: /root/batch5/file2
+    dest_dir: /etc/arjun/
   tasks:
     - name: create the file using playbook
       copy:
-        src: /root/batch5/file1
-        dest: /etc/arjun/
+        src: "{{ src_dir }}"
+        dest: "{{ dest_dir }}"

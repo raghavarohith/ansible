@@ -1,16 +1,13 @@
-
-
-
 ---
 - name: test playbook
-  hosts: all
-  become: yes
+  hosts: webserver
+  gather_facts: true
+  become: true
   tasks:
-    - name: create the directory using playbook
+    - name: create the file using playbook
       file:
-        path: /etc/raghavarohith/test1
+        path: /etc/arjun/test1
         state: touch
-        owner: root
-        group: test
+        owner: ec2-user
+        group: "{{ group_name }}"
         mode: 600
-

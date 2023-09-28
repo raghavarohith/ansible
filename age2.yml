@@ -1,0 +1,19 @@
+---
+- name: Combine data from multiple lists using map attribute
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Define lists of names and ages
+      set_fact:
+        names: ["Alice", "Bob", "Carol"]
+        ages: [25, 30, 22]
+
+    - name: Combine names and ages
+      set_fact:
+        people: "{{ people | default([]) + [{'name': item.0, 'age': item.1}] }}"
+      loop: "{{ names | zip(ages) | list }}"
+
+    - name: Display list of people
+      debug:
+        var: people
+

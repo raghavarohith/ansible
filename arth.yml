@@ -1,0 +1,17 @@
+---
+- name: Transform data using map attribute
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Define a list of numbers
+      set_fact:
+        numbers: [2, 4, 6, 8, 10]
+
+    - name: Square each number
+      set_fact:
+        squared_numbers: "{{ numbers | map('**', 2) | list }}"
+
+    - name: Display squared numbers
+      debug:
+        var: squared_numbers
+

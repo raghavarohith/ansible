@@ -1,0 +1,18 @@
+- hosts:
+
+    - localhost
+  gather_facts: false
+  vars:
+    medicines:
+      - { name: measles, type: injections }
+      - { name: nepawell, type: drops }
+      - { name: colace, type: suppositories }
+
+
+
+
+  tasks:
+       
+    - name: filter all medicines other than suppositories
+      debug:
+        msg: "{{ (medicines | rejectattr('type', 'match', 'suppositories') ) | list }}"

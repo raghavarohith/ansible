@@ -1,0 +1,45 @@
+- name: Apply different actions to subsets of servers
+  hosts: localhost
+
+  vars:
+    servers:
+      - name: webserver1
+        os: linux
+        environment: production
+        disk:
+          - name: /dev/sda
+            size: 100GB
+          - name: /dev/sdb
+            size: 500GB
+      - name: dbserver1
+        os: windows
+        environment: staging
+        disks:
+          - name: "/C:"
+            size: 500GB
+          - name: "D:"
+            size: 1TB
+      - name: appserver1
+        os: linux
+        environment: development
+        disks:
+          - name: /dev/sda
+            size: 200GB
+          - name: /dev/sdb
+            size: 200GB
+
+  tasks:
+    - name: Install httpd on Linux servers in production
+      yum:
+        name: httpd
+      loop: "{{ servers | selectattr('os', '==', 'linux') | selectattr('environment', '==', 'production') | list }}"
+      
+   # - name: Install Notepad++ on Windows servers in staging
+    #  win_package:
+     #   name: Notepad++
+      #loop: "{{ servers | selectattr('os', '==', 'windows') | selectattr('environment', '==', 'staging') | list }}"
+      
+    - name: Create mount points on Linux servers in development
+      yum:
+       name: nginx 
+      loop: "{{ servers | selectattr('os', '==', 'linux') | selectattr('environment', '==', 'development') | list }}"

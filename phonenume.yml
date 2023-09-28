@@ -1,0 +1,12 @@
+---
+- name: Debug Regular Expression Match
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Use regex to match phone number
+      debug:
+        var: phone_number_match
+      vars:
+        phone_number: +1a34567890
+        regex_pattern: "^[+91]+[0-9]{10}$"
+        phone_number_match: "{{ phone_number | regex_search(regex_pattern) }}"

@@ -1,17 +1,12 @@
-
-
-
 ---
 - name: test playbook
   hosts: localhost
   gather_facts: true
   become: true
   tasks:
-    - name: create the user using playbook
+    - name: create the file using playbook
       user:
         name: ec2-user
-        shell: /bin/sh
-        groups: root
+        shell: /bin/bash
+        groups: ec2-user
         state: present
-
-

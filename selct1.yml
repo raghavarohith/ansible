@@ -1,0 +1,14 @@
+- name: Select red fruits
+  hosts: localhost
+  vars:
+    fruits:
+      - name: apple
+        color: red
+      - name: banana
+        color: yellow
+      - name: cherry
+        color: red
+  tasks:
+  - name: debuge
+    debug:
+      var: fruits | selectattr('color', '==', 'red') | map(attribute='name') |  list

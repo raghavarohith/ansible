@@ -1,0 +1,15 @@
+---
+- name: Install and Restart Service
+  hosts: all
+  tasks:
+    - name: Install the package
+      yum:
+        name: httpd
+        state: present
+      notify: Restart My Service
+
+  handlers:
+    - name: Restart My Service
+      service:
+        name: httpd
+        state: restarted

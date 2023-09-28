@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  vars:
+    domain_names:
+      - 'JWJGTCAT4252.elpINFO.COM-443-VIP'
+      - 'JWJGTCAT5652.elpINFO.COM-80-VIP'
+      - 'abc123.elpINFO.COM-8080-VIP'
+      - 'ABC.456.elpINFO.COM-22-VIP'
+  tasks:
+  - name: Validate domain names
+    ansible.builtin.set_fact:
+      domain_out: "{{ domain_names | default({}) | map('regex_replace', '-\\d\\$, '') | list }}"
+
+  - name: Print the output
+    debug:
+      msg: "{{ domain_out }}"
