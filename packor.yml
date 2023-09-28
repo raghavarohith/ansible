@@ -1,0 +1,34 @@
+---
+- name: packages playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  vars:
+    env_name: dev
+    pkg_name: httpd
+    pkg_state: latest
+  tasks:
+    - name: installing httpd packages
+      yum:
+        name: "{{ pkg_name }}"
+        state: "{{ pkg_state }}"
+      when: env_name == 'dev' or pkg_state == 'absent'
+
+    - name: installing nginx packages
+      yum:
+        name: nginx
+        state: latest
+      when: env_name == 'prod'
+
+    - name: installing maven packages
+      yum:
+        name: maven
+        state: absent
+      when: env_name == 'build'
+
+    - name: installing apache packages
+      yum:
+        name: apache
+        state: latest
+      when: env_name == 'staging'
+
