@@ -1,0 +1,13 @@
+---
+- name: Debug Regular Expression Match
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Use regex to match string
+      debug:
+        var: string_match
+      vars:
+        input_string: ARJUN3rayewar
+        regex_pattern: "^[A-Z]{5}+[\\d]{1}+[a-z]*$"
+        string_match: "{{ input_string | regex_search(regex_pattern) }}"
+

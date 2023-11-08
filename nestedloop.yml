@@ -1,0 +1,19 @@
+---
+- name: test playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  vars:
+    users_to_create:
+      - username: user1
+        group: root
+      - username: user2
+        group: ec2-user
+    
+
+  tasks:
+    - name: installing the packages
+      user:
+        name: "{{ item.username }}"
+        group: "{{ item.group }}"
+      loop: "{{ users_to_create }}"

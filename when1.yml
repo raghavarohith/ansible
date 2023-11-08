@@ -1,0 +1,23 @@
+---
+- name: test playbook
+  hosts: webserver
+  gather_facts: true
+  become: true
+  vars:
+    env_name: dev
+    
+
+  tasks:
+    - name: installing the packages
+      yum:
+        name: nginx
+        state: absent
+      when: env_name == 'dev'
+
+
+    - name: installing the packages
+      yum:
+        name: httpd
+        state: latest
+      when: env_name == 'prod'
+     

@@ -1,0 +1,24 @@
+---
+- name: test playbook
+  hosts: all
+  gather_facts: true
+  become: true
+
+  tasks:
+    # - name: installing the packages
+    #   yum:
+    #     - name: httpd
+    #       state: latest
+    #   when: ansible_distribution == 'Redhat'
+
+    - name: installing the packages
+      yum:
+        name: nginx
+        state: absent
+      when: ansible_distribution == 'RedHat'
+      notify: ngnix is installed
+
+  handlers:
+    - name: ngnix is installed
+      debug:
+        msg: "this playbook is ran successfully"

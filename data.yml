@@ -1,0 +1,13 @@
+students:
+  - name: Alice
+    grade: A
+    city: hyd
+  - name: Bob
+    grade: B
+    city: chennai
+  - name: Carol
+    grade: C
+  - name: Dave
+    grade: D
+    city: usa
+

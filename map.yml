@@ -1,0 +1,17 @@
+---
+- name: Demonstrate the use of map attribute
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Read data from YAML file
+      include_vars:
+        file: data.yml
+
+    - name: Extract names of students using map
+      set_fact:
+        student_grades: "{{ students | map(attribute='grade') | list }}"
+
+    - name: Display student names
+      debug:
+        var: student_grades
+

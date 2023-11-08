@@ -1,0 +1,17 @@
+---
+- name: Filter servers using map attribute
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Read server data from YAML file
+      include_vars:
+        file: servers.yml
+
+    - name: Filter servers based on a specific attribute
+      set_fact:
+        filtered_servers: "{{ servers | selectattr('status', 'equalto', 'inactive') | list }}"
+
+    - name: Display filtered servers
+      debug:
+        var: filtered_servers
+

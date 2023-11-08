@@ -1,0 +1,31 @@
+---
+- name: Regex Replace Examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Replace pattern in a string
+      debug:
+        var: replaced_string
+      vars:
+        input_string: "Hello123World456"
+        regex_pattern: "[0-9]+"
+        replacement: "students"
+        replaced_string: "{{ input_string | regex_replace(regex_pattern, replacement) }}"
+        
+    - name: Replace email domain
+      debug:
+        var: replaced_email
+      vars:
+        input_email: "user@example.com"
+        regex_pattern: "@[a-z]+\\."
+        replacement: "@elpdevops."
+        replaced_email: "{{ input_email | regex_replace(regex_pattern, replacement) }}"
+        
+    - name: Replace multiple spaces with one space
+      debug:
+        var: cleaned_string
+      vars:
+        input_text: "This     is     a     text    with    spaces."
+        regex_pattern: "\\s+"
+        replacement: ":"
+        cleaned_string: "{{ input_text | regex_replace(regex_pattern, replacement) }}"

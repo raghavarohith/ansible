@@ -1,0 +1,10 @@
+---
+- name: Create users
+  hosts: all
+  become: true
+  vars_files:
+    - user_list.yaml 
+  tasks:
+    - name: Show users
+      debug:
+        msg: "{{ users }}"
