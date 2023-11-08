@@ -17,3 +17,21 @@
       debug:
         var: people
 
+---
+- name: Combine Data from Multiple Lists
+  hosts: localhost
+  vars:
+    list1:
+      - { "name": "Alice", "age": 30 }
+      - { "name": "Bob", "age": 25 }
+      - { "name": "Charlie", "age": 40 }
+    
+    list2:
+      - { "name": "Alice", "city": "New York" }
+      - { "name": "Bob", "city": "Los Angeles" }
+      - { "name": "David", "city": "Chicago" }
+
+  tasks:
+    - name: Combine data based on 'name'
+      debug:
+        msg: "{{ list1 | product(list2) | map('combine') | selectattr('0.name', 'equalto', '1.name') | list }}"
